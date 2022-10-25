@@ -1,12 +1,11 @@
-import {Kafka} from 'kafkajs'
+import {Kafka, RecordMetadata} from 'kafkajs'
 
 const kafka = new Kafka({
-    clientId: 'my-app',
-    brokers: ['localhost:9092'],
+    clientId: process.env.KAFKA_CLIENTID,
+    brokers: [String(process.env.KAFKA_BROKERS)],
   })
-
-const service = {
-    save :async (body:JSON) =>{
+export default class kafkaPublisherService{
+  static async save (body:JSON) :Promise<RecordMetadata[]>{
     const producer = kafka.producer()
     await producer.connect()
     const data = await producer.send({
@@ -18,6 +17,4 @@ const service = {
     await producer.disconnect()
     return data
     }
-}
-
-export default service
+  }
