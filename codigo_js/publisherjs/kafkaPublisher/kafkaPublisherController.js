@@ -10,7 +10,6 @@ router.post("/", async function(req, res){
     const data = await kafkaPublisherService.save(req.body)
     res.status(200)
     res.send(data)
-
 })
 
 module.exports = router;

@@ -1,7 +1,9 @@
 import express from 'express'
 import { Router, Request, Response ,NextFunction} from 'express'
 import kafkaPublisherRoute from "./provider/kafkaPublisher/kafkaPublisherControler"
+import chargerRoute from "./provider/charger/chargerControler"
 import loginRoute from"./provider/login/loginController"
+
 import dotenv from 'dotenv'
 import loginService from "./provider/login/loginService"
 import { HTTPError } from './type'
@@ -33,6 +35,7 @@ app.use((req:Request,res:Response,next:NextFunction)=>{
 })
 
 app.use("/publisher", kafkaPublisherRoute);
+app.use("/charger", chargerRoute);
 app.use("/login", loginRoute);
 
 route.get('/', (req: Request, res: Response) => {
