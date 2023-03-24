@@ -1,7 +1,7 @@
 import {Kafka} from 'kafkajs'
 import dotenv from  'dotenv'
 import S3Service from  './providers/AWSS3/s3Service'
-import ComputePiService from  './providers/util/computePi'
+import ComputeService from  './providers/util/compute'
 import AzureBlobService from  './providers/AzureBlob/azureBlobService'
 import GoogleStorageService from  './providers/GoogleStorage/googleStorageService'
 
@@ -23,8 +23,9 @@ const kafka = new Kafka({
       eachMessage: async ({ topic, partition, message }) => {
         console.log(JSON.parse(String(message.value)))
         const objContent =JSON.parse(String(message.value))
-        const computePi = ComputePiService.compute(objContent.piInterations)
-        const content = {pi:computePi,conteudo:objContent.content}
+        const computePi = ComputeService.pi(objContent.piInterations)
+        const computeDistEuclidiana = ComputeService.distanciaEuclidiana(objContent.coordenadas)
+        const content = {pi:computePi,distanciaEuclidiana:computeDistEuclidiana,conteudo:objContent.content}
         const fileName = objContent.fileName
         if(process.env.CLOUD==='AWS')
           S3Service.uploadFile(JSON.stringify(content,null,4),fileName)
