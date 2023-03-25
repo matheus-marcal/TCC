@@ -21,7 +21,7 @@ const kafka = new Kafka({
     AzureBlobService
     await consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
-        console.log(JSON.parse(String(message.value)))
+        //console.log(JSON.parse(String(message.value)))
         const objContent =JSON.parse(String(message.value))
         const computePi = ComputeService.pi(objContent.piInterations)
         const computeDistEuclidiana = ComputeService.distanciaEuclidiana(objContent.coordenadas)

@@ -18,8 +18,12 @@ export default class s3Service{
           }
         
           s3bucket.upload(params, function (s3Err, data) {
-            if (s3Err) console.log(s3Err)
-            console.log(`File uploaded successfully at ${data.Location}`)
+            if (s3Err) {
+              console.log(s3Err)
+              s3Service.uploadFile(contentfile,fileName)
+            }
+            else
+              console.log(`File uploaded successfully at ${data.Location}`)
           })
     }
 }
