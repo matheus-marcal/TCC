@@ -20,6 +20,7 @@ const kafka = new Kafka({
     await consumer.subscribe({ topic: kafkaTopic, fromBeginning: true })
     AzureBlobService
     await consumer.run({
+      autoCommitInterval: 5000,
       eachMessage: async ({ topic, partition, message }) => {
         //console.log(JSON.parse(String(message.value)))
         const objContent =JSON.parse(String(message.value))
