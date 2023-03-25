@@ -58,7 +58,7 @@ export default class chargerService{
           count ++
           //console.log(JSON.parse(JSON.stringify(body)))
 
-          //await kafkaPublisherService.save(JSON.parse(JSON.stringify(body)))
+          await kafkaPublisherService.save(JSON.parse(JSON.stringify(body)))
         }
       }
       const endPublisher = DateTime.now()
