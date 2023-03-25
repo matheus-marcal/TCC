@@ -5,7 +5,7 @@ const bucketName = process.env.GOOGLE_BUCKET_NAME?process.env.GOOGLE_BUCKET_NAME
 export default class googleStorageService{
     static async uploadFile(contentfile:string, fileName:string){
         const storage = new Storage();
-        await storage.bucket(bucketName).file(fileName).save(contentfile)
+        storage.bucket(bucketName).file(fileName).save(contentfile)
     }
 }
 

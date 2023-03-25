@@ -16,7 +16,7 @@ export default class azureBlobService{
         const containerClient = blobServiceClient.getContainerClient(containerName);
         const blobName = fileName;
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-        const uploadBlobResponse = await blockBlobClient.upload(contentfile, contentfile.length);
+        const uploadBlobResponse = blockBlobClient.upload(contentfile, contentfile.length);
     }
 }
 
